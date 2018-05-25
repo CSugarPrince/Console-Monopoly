@@ -9,7 +9,10 @@ import board
 import dice
 import player
 
+import logging
 
+logging.basicConfig(filename='game_log.log', filemode='w', level=logging.DEBUG,
+                    format='%(levelname)s:%(msg)s')
     
 class Game(object):
     """ Controls logic of game."""
@@ -23,15 +26,21 @@ class Game(object):
         self.dice = dice.Dice()                             # Game dice    
         
         
+        # Test logging 
+        logging.debug('Game Created')  
+        logging.info('Hello Log')
+        
         # Setup Game        
         print("Welcome to Console Monopoly!")
         self.change_game_settings()        
         
         # The first player created gets the first turn
-        self.current_player = self.player_list[0]    
+        self.current_player = self.player_list[0] 
         
         # Start the main game loop
-        self.main()                                     
+        self.main()       
+
+                                   
     
     def change_game_settings(self):
         """ Called by Game.init in order to setup game """
@@ -104,6 +113,7 @@ class Game(object):
         
     
 if __name__ == "__main__":    
+    
     Game()
     
     
