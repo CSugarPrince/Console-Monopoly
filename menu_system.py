@@ -6,6 +6,7 @@ Created on Fri May 25 10:41:27 2018
 """
 
 """ Code 'Library' for menus that will show up in the game """
+# TODO: Create "player_in_jail_menu".
 
 # Game menu: setup
 setup_menu = {}
@@ -16,6 +17,12 @@ setup_menu['2'] = "Start Game."
 player_menu = {}
 player_menu['1'] = "Roll Dice."
 player_menu['2'] = "Display Owned Properties."
+
+# Player menu: in jail
+player_in_jail_menu = {}
+player_in_jail_menu['1'] = "Roll Dice."
+player_in_jail_menu['2'] = "Use Get Out of Jail Free Card."
+player_in_jail_menu['3'] = "Tough it Out."
 
 # Tile menu: unowned property
 unowned_property_menu = {}
