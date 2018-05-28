@@ -70,3 +70,28 @@ class Property(Tile):
     
     def view_property(self):
         print(self.name)    
+        
+        
+class Chance(Tile):
+    
+    chance_card_stack = None
+    
+    def __init__(self, name):
+        
+        self.name = name                        # Name should be Chance
+        
+        # Creates a stack of Chance cards that all Chance Tiles can pull from
+        if Chance.chance_card_stack is None:
+            # Create chance card stack
+        
+        
+    def trigger_event(self, player):
+        
+        print("You triggered the chance tile!")
+        
+        
+        
+        
+        
+        
+        

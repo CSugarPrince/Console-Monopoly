@@ -4,7 +4,11 @@ Created on Tue May  8 12:55:21 2018
 
 @author: Joshua Hew
 """
-# TODO: test player in jail functions
+# TODO: Test player in jail functions
+# TODO: Code end_player_turn function
+# TODO: Add better logging, figure out which information to log
+# TODO: Code chance and community chest tiles
+# TODO: Code owned property menu/ options
 
 
 import menu_system as ms
