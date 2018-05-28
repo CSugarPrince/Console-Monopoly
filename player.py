@@ -18,7 +18,7 @@ class Player(object):
             self.name = name                            # The player's name
             self.position = 0                           # Position on Board
             self.current_tile = None                    # Player starts on GO 
-            self.is_in_jail = True                      # Jail status
+            self.is_in_jail = False                      # Jail status
             self.num_turns_in_jail = 0                  # Number of turns player has been in jail
             self.owned_properties = []                  # List of player's owned properties
             self.balance = 1500                         # Amount of money

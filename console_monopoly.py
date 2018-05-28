@@ -16,6 +16,7 @@ import board
 import dice
 import player
 
+import itertools
 import logging
 
 logging.basicConfig(filename='game_log.log', filemode='w', level=logging.DEBUG,
@@ -29,7 +30,8 @@ class Game(object):
         self.MAX_NUM_PLAYERS = 4                            # Maximum number of players allowed
         self.player_list = []                               # Players in game
         self.current_player = None                          # Current player/ player turn
-        self.turn_counter = 0                               # Number of turns Game has cycled through
+        self.cp_cycle = None                                # Cycles through player_list
+        self.round_counter = 0                              # Number of rounds Game has cycled through
         self.dice = dice.Dice()                             # Game dice    
         
         
@@ -41,8 +43,11 @@ class Game(object):
         print("Welcome to Console Monopoly!")
         self.change_game_settings()        
         
+        # Create player cycler
+        self.cp_cycle = itertools.cycle(self.player_list)
+        
         # The first player created gets the first turn
-        self.current_player = self.player_list[0] 
+        self.current_player = next(self.cp_cycle) 
         
         # Start the main game loop
         self.main()       
@@ -83,9 +88,7 @@ class Game(object):
     def start_player_turn(self, player):
         """ Monopoly consists of turns. Each turn a player can choose to do something """
         
-        # Increment game's turn counter
-        self.turn_counter += 1                  
-        
+         
         if player.is_in_jail:
             # Default jail sentence time is 3 turns
             did_his_time = player.num_turns_in_jail == 3
@@ -175,6 +178,7 @@ class Game(object):
                     else:    
                         # Pass dice roll value to player's movement function
                         player.move(move_amount)
+                        break
                     
                     # If player got sent to jail after moving, break out of player options
                     if player.is_in_jail == False and self.dice.rolled_doubles:
@@ -188,23 +192,25 @@ class Game(object):
                 elif selection == '2':
                     player.display_owned_properties()
                     
-                    # Break out of player menu
-                    break
+                    # Let player see options again
+                    continue
                     
                 else:
                    print("Unknown option selected!")
     
     def end_player_turn(self, player):
         
-        self.turn_counter += 1
+        self.round_counter += 1
+        self.current_player = next(self.cp_cycle)
     
     def main(self):
         
         self.round_counter = 1
         
         while True:
-            print("Round {}".format(self.turn_counter))
-            logging.info("Round {}".format(self.turn_counter))
+            print("Round {}.".format(self.round_counter))
+            print("Current Turn: {}.".format(self.current_player.name))
+            logging.info("Round {}".format(self.round_counter))
             
             self.start_player_turn(self.current_player)
             self.end_player_turn(self.current_player)

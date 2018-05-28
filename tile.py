@@ -83,7 +83,7 @@ class Chance(Tile):
         # Creates a stack of Chance cards that all Chance Tiles can pull from
         if Chance.chance_card_stack is None:
             # Create chance card stack
-        
+            pass
         
     def trigger_event(self, player):
         
